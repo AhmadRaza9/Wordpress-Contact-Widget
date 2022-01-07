@@ -21,9 +21,15 @@
 
     /** Include  Widget **/
     function register_contact_widget() {
-        // register_widget( 'Contact_Widget_2' );
         register_widget('Raza_Contact_Widget');
     }
     add_action( 'widgets_init', 'register_contact_widget' );
+
+
+    function wpb_load_widget() {
+        register_widget( 'wpb_widget' );
+    }
+    add_action( 'widgets_init', 'wpb_load_widget' );
+
 
 ?>
