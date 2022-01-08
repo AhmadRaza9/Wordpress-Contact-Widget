@@ -121,20 +121,23 @@ class wpb_widget extends WP_Widget {
     public function widget( $args, $instance ) {
         $title = apply_filters( 'My-Widget', $instance['title'] );
         $subject = apply_filters( 'My-Widget', $instance['subject'] );
+        $image = apply_filters( 'My-Widget', $instance['image'] );
   
         echo $args['before_widget'];
         if ( !empty($title) ){
             echo $args['before_title'] . $title . $args['after_title'];
             echo $args['before_title'] . $subject . $args['after_title'];
+            echo $args['before_title'] . $image . $args['after_title'];
         }
         echo $args['after_widget'];
     }
               
     // Creating widget Backend 
     public function form( $instance ) {
-        if ( isset( $instance[ 'title' ]) && isset( $instance[ 'subject' ])) {
+        if ( isset( $instance[ 'title' ]) && isset( $instance[ 'subject' ]) && isset( $instance[ 'image' ])) {
             $title = $instance[ 'title' ];
             $subject = $instance[ 'subject' ];
+            $image = $instance[ 'image' ];
             }
             else {
             $title = __( 'New title', 'wpb_widget_domain' );
@@ -145,6 +148,7 @@ class wpb_widget extends WP_Widget {
                 <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
                 <label for="<?php echo $this->get_field_id( 'subject' ); ?>"><?php _e( 'Sujbect:' ); ?></label> 
                 <input class="widefat" id="<?php echo $this->get_field_id( 'subject' ); ?>" name="<?php echo $this->get_field_name( 'subject' ); ?>" type="text" value="<?php echo esc_attr( $subject ); ?>">
+                <img src="http://newtek.test/wp-content/uploads/2022/01/demon.png" width="150px" id="<?php echo $this->get_field_id( 'image' ); ?>">
             </p>
             <?php 
     }
@@ -154,6 +158,7 @@ class wpb_widget extends WP_Widget {
         $instance = array();
         $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
         $instance['subject'] = ( ! empty( $new_instance['subject'] ) ) ? strip_tags( $new_instance['subject'] ) : '';
+        $instance['image'] = ( ! empty( $new_instance['image'] ) ) ? strip_tags( $new_instance['image'] ) : '';
         return $instance;
     }
      
